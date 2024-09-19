@@ -1,0 +1,70 @@
+views:
+  - title: Home
+    type: sections
+    max_columns: 5
+    sections:
+      - type: grid
+        cards:
+          - type: entity
+            entity: sensor.ecodesign_status_typ
+            name: ED300 Betriebsstatus
+            state_color: true
+            icon: mdi:heat-pump
+          - graph: line
+            type: sensor
+            entity: sensor.plug_ed_energy_power
+            detail: 1
+            name: Power Consumption
+            unit: W
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.ecodesign_alarm
+                state_not: '0'
+            card:
+              type: entity
+              entity: sensor.ecodesign_alarm_typ
+              name: ALARM
+              state_color: true
+              icon: mdi:alarm-light
+          - type: entities
+            entities:
+              - entity: binary_sensor.ecodesign_di1_pressostat
+                name: Pressostat
+                state_color: true
+                icon: mdi:checkbox-blank-circle
+              - entity: binary_sensor.ecodesign_relay2_heizstab
+                name: Heizstab
+                state_color: true
+                icon: mdi:heat-wave
+              - entity: binary_sensor.ecodesign_relay6_kessel
+                name: Kessel
+                state_color: true
+                icon: mdi:water-boiler-alert
+              - entity: binary_sensor.ecodesign_relay1_kompressor
+                name: Kompressor
+                state_color: true
+                icon: mdi:pump
+              - entity: binary_sensor.ecodesign_relay3_magnetventil
+                name: Magnetventil
+                state_color: true
+                icon: mdi:magnet
+              - entity: binary_sensor.ecodesign_di2_pv
+                name: Smat Grid
+                state_color: true
+                icon: mdi:solar-power-variant-outline
+              - entity: binary_sensor.ecodesign_relay4_ac_low
+                name: FAN AC (LOW) - R4
+                icon: mdi:air-conditioner
+              - entity: binary_sensor.ecodesign_relay5_ec_on_ac_high
+                icon: mdi:fan
+                name: 'EC FAN (AC FAN: HIGH) R5'
+            show_header_toggle: false
+            state_color: true
+          - type: entities
+            entities:
+              - entity: sensor.ecodesign_fantype_typ
+                name: FAN TYPE
+                icon: mdi:fan
+              - entity: sensor.ecodesign_wp_lufterstufe_typ
+title: ED300 WT-EX
